@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goa Connect 18+ | Adult Companionship</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0f1117;color:#f5f5f5}
+header{padding:18px 7%;display:flex;justify-content:space-between;align-items:center;background:#171a23;position:sticky;top:0;z-index:5}
+.logo{font-size:24px;font-weight:800;color:#ff6b8a}.nav a{color:#ddd;text-decoration:none;margin-left:20px}
+.hero{padding:90px 7%;text-align:center;background:linear-gradient(135deg,#171a23,#351d32)}
+.hero h1{font-size:48px;margin:10px 0}.hero p{color:#ccc;font-size:18px}.btn{display:inline-block;padding:13px 22px;border-radius:28px;background:#ff5d82;color:#fff;text-decoration:none;border:0;cursor:pointer}
+section{padding:55px 7%}h2{text-align:center;font-size:32px}
+.filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:25px 0}
+input,select{padding:12px;border-radius:8px;border:1px solid #333;background:#191c25;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#191c25;border-radius:16px;padding:20px;text-align:center;border:1px solid #292d39}
+.avatar{height:150px;border-radius:12px;background:linear-gradient(135deg,#34384a,#6b3047);display:grid;place-items:center;font-size:48px;margin-bottom:15px}
+.badge{color:#8fe3b0;font-size:13px}.muted{color:#aaa}.safety{background:#171a23}.contact{max-width:600px;margin:auto}.contact input,.contact textarea{width:100%;margin:7px 0;padding:13px}
+footer{text-align:center;padding:30px;color:#999;background:#0a0c11}
+#gate{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:20;display:flex;align-items:center;justify-content:center;text-align:center;padding:25px}
+.gatebox{max-width:480px;background:#191c25;padding:35px;border-radius:18px}
+.hidden{display:none!important}
+@media(max-width:600px){.hero h1{font-size:36px}.nav{display:none}}
+</style>
+</head>
+<body>
+<div id="gate"><div class="gatebox">
+<h1>18+ Only</h1><p>This website is intended only for adults aged 18 or over. By entering, you confirm that you are 18+ and agree to use the site lawfully.</p>
+<button class="btn" onclick="enterSite()">I am 18+ — Enter</button>
+</div></div>
+
+<header><div class="logo">Goa Connect 18+</div><nav class="nav">
+<a href="#profiles">Profiles</a><a href="#safety">Safety</a><a href="#contact">Contact</a>
+</nav></header>
+
+<main>
+<section class="hero"><h1>Meet People in Goa</h1>
+<p>Adult companionship & dating directory for verified adults.</p>
+<a class="btn" href="#profiles">Browse Profiles</a> <a class="btn" href="tel:+918918123933">Call 8918123933</a> <a class="btn" href="https://wa.me/918918123933" target="_blank" rel="noopener">WhatsApp</a></section>
+
+<section id="profiles"><h2>Featured Profiles</h2>
+<div class="filters"><input id="search" placeholder="Search by name or area" oninput="filterCards()">
+<select id="area" onchange="filterCards()"><option value="">All Goa</option><option>North Goa</option><option>South Goa</option><option>Panaji</option></select></div>
+<div class="grid" id="grid">
+<div class="card" data-name="Aanya" data-area="North Goa"><div class="avatar">👩</div><h3>Aanya</h3><div class="badge">● Available for chat</div><p class="muted">North Goa</p><a class="btn" href="#contact">Contact</a></div>
+<div class="card" data-name="Maya" data-area="Panaji"><div class="avatar">👩</div><h3>Maya</h3><div class="badge">● Available for chat</div><p class="muted">Panaji</p><a class="btn" href="#contact">Contact</a></div>
+<div class="card" data-name="Riya" data-area="South Goa"><div class="avatar">👩</div><h3>Riya</h3><div class="badge">● Available for chat</div><p class="muted">South Goa</p><a class="btn" href="#contact">Contact</a></div>
+</div>
+</section>
+
+<section id="safety" class="safety"><h2>Safety & Privacy</h2>
+<div class="grid"><div><h3>18+ only</h3><p class="muted">All users must be adults. Do not use the service if you are under 18.</p></div>
+<div><h3>Verify independently</h3><p class="muted">Meet in public places first and never share passwords, OTPs or financial credentials.</p></div>
+<div><h3>Respect & consent</h3><p class="muted">All interactions must be consensual and comply with applicable law.</p></div></div>
+</section>
+
+<section id="contact"><h2>Contact / Request</h2><p style="text-align:center"><a class="btn" href="tel:+918918123933">Call 8918123933</a> <a class="btn" href="https://wa.me/918918123933" target="_blank" rel="noopener">WhatsApp</a></p><form class="contact" onsubmit="sendRequest(event)">
+<input required placeholder="Your name"><input type="email" required placeholder="Email">
+<textarea required rows="5" placeholder="Write your message"></textarea>
+<button class="btn" type="submit">Send Request</button><p id="msg" class="muted"></p></form></section>
+</main>
+
+<footer>© 2026 Goa Connect 18+ · Privacy · Terms · Safety</footer>
+
+<script>
+function enterSite(){document.getElementById('gate').classList.add('hidden');localStorage.setItem('adultConfirmed','yes')}
+if(localStorage.getItem('adultConfirmed')==='yes')document.getElementById('gate').classList.add('hidden');
+function filterCards(){
+ const q=document.getElementById('search').value.toLowerCase(), a=document.getElementById('area').value;
+ document.querySelectorAll('.card').forEach(c=>c.style.display=((c.dataset.name.toLowerCase().includes(q)||c.dataset.area.toLowerCase().includes(q))&&(!a||c.dataset.area===a))?'block':'none');
+}
+function sendRequest(e){e.preventDefault();document.getElementById('msg').textContent='Thanks. This demo form is ready to connect to your backend/email service.'}
+</script>
+</body>
+</html>
